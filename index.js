@@ -6,6 +6,8 @@ const fetch = require('node-fetch');
 
 async function run() {
   try {
+	
+    console.log(process.env.GCS_CRDENTIALS)  
     // Set up GCS credentials
     const storage = new Storage({
       keyFilename: process.env.GCS_CREDENTIALS
