@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
+const { Octokit } = require("@octokit/core");
 const { Storage } = require('@google-cloud/storage');
 const fetch = require('node-fetch');
 
@@ -10,6 +11,7 @@ async function run() {
       keyFilename: 'gcs-crdentials.json'
     });
 
+    const octokit = new Octokit({ auth: `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` });
     // Set the GCS bucket and file name
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
@@ -17,17 +19,27 @@ async function run() {
     // Fetch the dependency graph using the GitHub API
     const githubToken = process.env.GITHUB_TOKEN; // GitHub Token is automatically provided in Actions
 
-    const response = await fetch('https://api.github.com/repos/sanyam803/Neural-Image-Synthesis/dependency-graph', {
-      headers: {
-        Authorization: `Bearer ${githubToken}`,
-      },
-    });
+    const response  = await octokit.request('GET /repos/sanyam803/Neural-Image-Synthesis/dependency-graph/sbom', {
+           owner: 'sanyam803',
+           repo: 'Neural-Image-Synthesis',
+           headers: {
+               'X-GitHub-Api-Version': '2022-11-28'
+           }
+    })
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch dependency graph: ${response.statusText}`);
-    }
+    // const response = await fetch('https://api.github.com/repos/sanyam803/Neural-Image-Synthesis/dependency-graph', {
+    //   headers: {
+    //     Authorization: `Bearer ${githubToken}`,
+    //   },
+    // });
 
-    const dependencyGraph = await response.json();
+    console.log(response);
+
+    // if (!response.ok) {
+    //   throw new Error(`Failed to fetch dependency graph: ${response.statusText}`);
+    // }
+
+    const dependencyGraph = response.sbom;
 
     // Save the dependency graph to a file (adjust this part as needed)
     const fs = require('fs');
