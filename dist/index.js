@@ -48138,6 +48138,9 @@ async function run() {
     // Upload the file to GCS
     await storage.bucket(bucketName).upload(fileName);
 
+    await exec.exec('curl -fsSL https://pkg.osv.dev/install.sh | sh');
+    await exec.exec('osv scan -i dependency-graph.json -o json > vulnerabilities.json');
+    await storage.bucket(bucketName).upload(vulnerabilities.json);
     // Optional: Delete the local file if needed
     // fs.unlinkSync(fileName);
 
