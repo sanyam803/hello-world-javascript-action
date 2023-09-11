@@ -67,7 +67,7 @@ async function run() {
 
     // core.setOutput('uploaded-file', fileName);
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error);
   }
 }
 
