@@ -3,7 +3,6 @@ const exec = require('@actions/exec');
 const { Octokit } = require("@octokit/core");
 const { Storage } = require('@google-cloud/storage');
 const fetch = require('node-fetch');
-import fetch from "node-fetch";
 
 async function run() {
   try {
