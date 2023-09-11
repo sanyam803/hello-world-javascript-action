@@ -48080,10 +48080,10 @@ const fetch = __nccwpck_require__(7119);
 async function run() {
   try {
 	
-    console.log(process.env.GCS_CRDENTIALS)  
+    console.log(core.getInput('gcs_credential'))  
     // Set up GCS credentials
     const storage = new Storage({
-      keyFilename: process.env.INPUT_GCS_CREDENTIALS
+      keyFilename: core.getInput('gcs_credentials')
     });
 
     console.log("Log Testing");
