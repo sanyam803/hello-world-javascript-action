@@ -48088,7 +48088,7 @@ async function run() {
     core.info("Log Testing");
     
     const octokit = new Octokit({ 
-      auth: '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',
+      auth: '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',
       request: {
         fetch: fetch,
       }
