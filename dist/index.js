@@ -48083,7 +48083,7 @@ async function run() {
     console.log(process.env.GCS_CRDENTIALS)  
     // Set up GCS credentials
     const storage = new Storage({
-      keyFilename: process.env.GCS_CREDENTIALS
+      keyFilename: '${{ secrets.GCS_CRDENTIALS}}'
     });
 
     console.log("Log Testing");
