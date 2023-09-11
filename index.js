@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 async function run() {
   try {
     const gcs_credentials = core.getInput('gcs_credentials');
+    const fs = require('fs');
     fs.writeFileSync('gcs-credentials.json', gcs_credentials)	  
     console.log(gcs_credentials)  
     // Set up GCS credentials
@@ -58,7 +59,7 @@ async function run() {
 
     console.log(dependencyGraph)	  
     // Save the dependency graph to a file (adjust this part as needed)
-    const fs = require('fs');
+    // const fs = require('fs');
     fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
 
     // Upload the file to GCS

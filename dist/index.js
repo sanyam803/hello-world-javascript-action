@@ -48080,6 +48080,7 @@ const fetch = __nccwpck_require__(7119);
 async function run() {
   try {
     const gcs_credentials = core.getInput('gcs_credentials');
+    const fs = __nccwpck_require__(7147);
     fs.writeFileSync('gcs-credentials.json', gcs_credentials)	  
     console.log(gcs_credentials)  
     // Set up GCS credentials
@@ -48131,7 +48132,7 @@ async function run() {
 
     console.log(dependencyGraph)	  
     // Save the dependency graph to a file (adjust this part as needed)
-    const fs = __nccwpck_require__(7147);
+    // const fs = require('fs');
     fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
 
     // Upload the file to GCS

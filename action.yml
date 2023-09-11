@@ -1,6 +1,6 @@
 name: 'SBOM Generation'
 description: 'Greet someone and record the time'
-input :
+inputs :
   gcs_credentials : # gcp creds 
     description: 'gcp creds'
     required: true
