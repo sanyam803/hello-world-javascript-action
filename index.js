@@ -17,7 +17,7 @@ async function run() {
     // Fetch the dependency graph using the GitHub API
     const githubToken = process.env.GITHUB_TOKEN; // GitHub Token is automatically provided in Actions
 
-    const response = await fetch('https://api.github.com/repos/yourusername/yourrepository/dependency-graph', {
+    const response = await fetch('https://api.github.com/repos/sanyam803/Neural-Image-Synthesis/dependency-graph', {
       headers: {
         Authorization: `Bearer ${githubToken}`,
       },
