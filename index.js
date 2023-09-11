@@ -7,22 +7,22 @@ import fetch from "node-fetch";
 
 async function run() {
   try {
-    // Set up GCS credentials
-    // const storage = new Storage({
-    //   keyFilename: 'gcs-crdentials.json'
-    // });
+    Set up GCS credentials
+    const storage = new Storage({
+      keyFilename: 'gcs-crdentials.json'
+    });
 
     console.log("Log Testing");
     core.info("Log Testing");
     
-    const octokit = new Octokit({ 
-      auth: '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'
-    });
-    const {
-       data: { login },
-    } = await octokit.rest.users.getAuthenticated();
-    console.log("Hello, %s", login);
-    core.info("Hello, %s", login);
+    // const octokit = new Octokit({ 
+    //   auth: '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'
+    // });
+    // const {
+    //    data: { login },
+    // } = await octokit.rest.users.getAuthenticated();
+    // console.log("Hello, %s", login);
+    // core.info("Hello, %s", login);
     
     console.log("successfully generated octokit client");
     
