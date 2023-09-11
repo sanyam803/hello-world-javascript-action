@@ -12,6 +12,8 @@ async function run() {
       keyFilename: 'gcs-crdentials.json'
     });
 
+    console.log("Log Testing");
+    
     const octokit = new Octokit({ 
       auth: `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`,
       request: {
