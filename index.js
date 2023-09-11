@@ -14,8 +14,9 @@ async function run() {
     console.log("Log Testing");
     core.info("Log Testing");
     
+	  
     const octokit = new Octokit({ 
-      auth: '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',
+      auth: process.env.GITHUB_TOKEN,
       request: {
         fetch: fetch,
       }
