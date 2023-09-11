@@ -15,7 +15,10 @@ async function run() {
     core.info("Log Testing");
     
     const octokit = new Octokit({ 
-      auth: `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`
+      auth: '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',
+      request: {
+        fetch: fetch,
+      }
     });
     const {
        data: { login },
