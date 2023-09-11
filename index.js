@@ -8,12 +8,11 @@ async function run() {
   try {
     // Set up GCS credentials
     const storage = new Storage({
-      keyFilename: 'gcs-crdentials.json'
+      keyFilename: process.env.GCS_CREDENTIALS
     });
 
     console.log("Log Testing");
     core.info("Log Testing");
-    
 	  
     const octokit = new Octokit({ 
       auth: process.env.GITHUB_TOKEN,
