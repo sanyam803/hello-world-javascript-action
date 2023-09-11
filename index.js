@@ -3,6 +3,7 @@ const exec = require('@actions/exec');
 const { Octokit } = require("@octokit/core");
 const { Storage } = require('@google-cloud/storage');
 const fetch = require('node-fetch');
+import fetch from "node-fetch";
 
 async function run() {
   try {
@@ -11,7 +12,12 @@ async function run() {
       keyFilename: 'gcs-crdentials.json'
     });
 
-    const octokit = new Octokit({ auth: `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` });
+    const octokit = new Octokit({ 
+      auth: `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`,
+      request: {
+        fetch: fetch,
+      }
+    });
     // Set the GCS bucket and file name
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
