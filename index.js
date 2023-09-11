@@ -11,7 +11,7 @@ async function run() {
       keyFilename: 'gcs-crdentials.json'
     });
 
-    const octokit = new Octokit({ auth: `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` });
+    const octokit = new Octokit({ auth: `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` });
     // Set the GCS bucket and file name
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
