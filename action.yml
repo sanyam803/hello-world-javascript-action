@@ -1,6 +1,6 @@
 name: 'SBOM Generation'
 description: 'Greet someone and record the time'
 runs:
-  using: 'node16'
+  using: 'node18'
   main: 'dist/index.js'
 
