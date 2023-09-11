@@ -20,11 +20,7 @@ async function run() {
         fetch: fetch,
       }
     });
-    const {
-       data: { login },
-    } = await octokit.rest.users.getAuthenticated();
-    console.log("Hello, %s", login);
-    core.info("Hello, %s", login);
+    
     console.log("successfully generated octokit client");
     
     // Set the GCS bucket and file name
