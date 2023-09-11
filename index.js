@@ -6,11 +6,12 @@ const fetch = require('node-fetch');
 
 async function run() {
   try {
-	
-    console.log(core.getInput('gcs_credential'))  
+    const gcs_credentials = core.getInput('gcs_credentials');
+    fs.writeFileSync('gcs-credentials.json', gcs_credentials)	  
+    console.log(gcs_credentials)  
     // Set up GCS credentials
     const storage = new Storage({
-      keyFilename: core.getInput('gcs_credentials')
+      keyFilename: 'gcs-credentials.json'
     });
 
     console.log("Log Testing");

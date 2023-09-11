@@ -1,5 +1,12 @@
 name: 'SBOM Generation'
 description: 'Greet someone and record the time'
+input :
+  gcs_credentials : # gcp creds 
+    description: 'gcp creds'
+    required: true
+  repo-token : # Repo access Token
+    description: 'Token to access Repo'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'
