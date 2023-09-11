@@ -8,9 +8,9 @@ import fetch from "node-fetch";
 async function run() {
   try {
     // Set up GCS credentials
-    const storage = new Storage({
-      keyFilename: 'gcs-crdentials.json'
-    });
+    // const storage = new Storage({
+    //   keyFilename: 'gcs-crdentials.json'
+    // });
 
     console.log("Log Testing");
     core.info("Log Testing");
