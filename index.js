@@ -15,7 +15,7 @@ async function run() {
     core.info("Log Testing");
     
     const octokit = new Octokit({ 
-      auth: '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',
+      auth: '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',
       request: {
         fetch: fetch,
       }
@@ -29,14 +29,15 @@ async function run() {
 
     // Fetch the dependency graph using the GitHub API
     const githubToken = process.env.GITHUB_TOKEN; // GitHub Token is automatically provided in Actions
-
+   
     const response  = await octokit.request('GET /repos/sanyam803/Neural-Image-Synthesis/dependency-graph/sbom', {
            owner: 'sanyam803',
-           repo: 'Neural-Image-Synthesis',
+           repo: 'Neural-Image-Synthesis', 
            headers: {
                'X-GitHub-Api-Version': '2022-11-28'
            }
     })
+	  
 
     // const response = await fetch('https://api.github.com/repos/sanyam803/Neural-Image-Synthesis/dependency-graph', {
     //   headers: {
@@ -44,14 +45,15 @@ async function run() {
     //   },
     // });
 
-    // console.log(response);
+    //console.log(response);
 
     // if (!response.ok) {
     //   throw new Error(`Failed to fetch dependency graph: ${response.statusText}`);
     // }
 
-    const dependencyGraph = response.sbom;
+    const dependencyGraph = response.data.sbom;
 
+    console.log(dependencyGraph)	  
     // Save the dependency graph to a file (adjust this part as needed)
     const fs = require('fs');
     fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
