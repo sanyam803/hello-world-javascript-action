@@ -13,13 +13,16 @@ async function run() {
     });
 
     console.log("Log Testing");
+    core.info("Log Testing");
     
     const octokit = new Octokit({ 
-      auth: `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`,
-      request: {
-        fetch: fetch,
-      }
+      auth: `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`
     });
+    const {
+       data: { login },
+    } = await octokit.rest.users.getAuthenticated();
+    console.log("Hello, %s", login);
+    core.info("Hello, %s", login);
     console.log("successfully generated octokit client");
     
     // Set the GCS bucket and file name
