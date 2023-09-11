@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sanyam803/hello-world-javascript-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
     "@actions/github": "^5.1.1",
     "@google-cloud/storage": "^7.1.0"
   }
