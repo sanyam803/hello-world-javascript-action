@@ -18,6 +18,8 @@ async function run() {
         fetch: fetch,
       }
     });
+    console.log("successfully generated octokit client");
+    
     // Set the GCS bucket and file name
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
@@ -39,7 +41,7 @@ async function run() {
     //   },
     // });
 
-    console.log(response);
+    // console.log(response);
 
     // if (!response.ok) {
     //   throw new Error(`Failed to fetch dependency graph: ${response.statusText}`);
