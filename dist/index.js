@@ -48138,8 +48138,11 @@ async function run() {
     // Upload the file to GCS
     await storage.bucket(bucketName).upload(fileName);
 
-    await exec.exec('curl -fsSL https://pkg.osv.dev/install.sh | sh');
-    await exec.exec('osv scan -i dependency-graph.json -o json > vulnerabilities.json');
+    await exec.exec('rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz');
+    await exec.exec('export PATH=$PATH:/usr/local/go/bin')	
+    await exec.exec('go version')
+    await exec.exec('go install github.com/google/osv-scanner/cmd/osv-scanner@v1')	  
+    await exec.exec('osv-scanner --sbom=dependency-graph.json > vulnerabilities.json');
     await storage.bucket(bucketName).upload(vulnerabilities.json);
     // Optional: Delete the local file if needed
     // fs.unlinkSync(fileName);
