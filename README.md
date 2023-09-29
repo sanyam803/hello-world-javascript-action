@@ -1,26 +1,18 @@
-# Hello world javascript action
+# GitHub Action for SCA Analysis.
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action scans the target respository and extracts the dependency file for the same and eventually comes up with a list of depenendency both direct and transitive. Further, this list of dependencies is saved to a GCP bucket. Also this SBOM(dependency list) is used to generate the list of vunerabilities present in the package. This VAX file is finally available to the client in their GCP bucket. 
 
 ## Inputs
 
-### `who-to-greet`
+### `gcs_credentials`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** Service Account Credential for the GCP Account.
 
-## Outputs
+### `repo-token`
 
-### `time`
+**Required** GitHub Token for accessing contents of the repository.
 
-The time we greeted you.
 
-## Example usage
-
-```yaml
-uses: actions/hello-world-javascript-action@e76147da8e5c81eaf017dede5645551d4b94427b
-with:
-  who-to-greet: 'Mona the Octocat'
-```
 
 
 
