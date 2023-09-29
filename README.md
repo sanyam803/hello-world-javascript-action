@@ -12,7 +12,13 @@ This action scans the target respository and extracts the dependency file for th
 
 **Required** GitHub Token for accessing contents of the repository.
 
+### `owner`
 
+**Required** Repository Owner Name.
+
+### `repoName`
+
+**Required** Name of the Repo to be scanned.
 
 
 
