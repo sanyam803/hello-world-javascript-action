@@ -7,6 +7,12 @@ inputs :
   repo-token : # Repo access Token
     description: 'Token to access Repo'
     required: true
+  owner : # Owner Name of the repository
+    description: 'Repository Owner Name'
+    required: true
+  repoName : # Target Repo 
+    description: 'Name of the Repo to be scanned'
+    required: true  
 runs:
   using: 'node16'
   main: 'dist/index.js'
