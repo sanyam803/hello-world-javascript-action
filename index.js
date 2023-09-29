@@ -34,7 +34,7 @@ async function run() {
     const githubToken = process.env.GITHUB_TOKEN; // GitHub Token is automatically provided in Actions
 
     // Fetch SBOM for the the requesting package 
-    const response  = await octokit.request("GET /repos/" + owner + "/" + repoName + "/dependency-graph/sbom', {
+    const response  = await octokit.request("GET /repos/" + owner + "/" + repoName + "/dependency-graph/sbom", {
            owner: owner,
            repo: repoName, 
            headers: {
