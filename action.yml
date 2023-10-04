@@ -1,7 +1,7 @@
-name: 'SBOM Generation'
-description: 'Greet someone and record the time'
+name: 'VAX Generator'
+description: 'Generates SBOM & VAX for the Repository and persist it in GCP Bucket'
 inputs :
-  gcs_credentials : # gcp creds 
+  gcs_credentials : # gcp creds
     description: 'gcp creds'
     required: true
   repo-token : # Repo access Token
@@ -10,9 +10,9 @@ inputs :
   owner : # Owner Name of the repository
     description: 'Repository Owner Name'
     required: true
-  repoName : # Target Repo 
+  repoName : # Target Repo
     description: 'Name of the Repo to be scanned'
-    required: true  
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'
