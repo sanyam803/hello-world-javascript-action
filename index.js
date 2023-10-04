@@ -22,7 +22,7 @@ async function invokePlugin() {
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
 
-    const dependencyGraph  = fetchSBOM(octokit, owner, repoName);
+    const dependencyGraph  = fetchSBOM(owner, repoName);
 
     // Save the dependency graph to a file (adjust this part as needed)
     fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
