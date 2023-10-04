@@ -41,10 +41,10 @@ async function run() {
 }
 
 /**
- * Fetch SBOM of the Repo.
- * @param {string} owner
- * @param {string} repoName
- * @return {?Object} sbom
+ * Fetch SBOM of the Repository.
+ * @param {string} owner : repo owner.
+ * @param {string} repoName : name of repo.
+ * @return {!Object} sbom : SBOM of the repo generated using GitHub API.
  */
 async function fetchSBOM(owner, repoName) {
   const octokit = new Octokit({
@@ -53,15 +53,18 @@ async function fetchSBOM(owner, repoName) {
       fetch: fetch,
     }
   });
-  const response  = await octokit.request("GET /repos/" + owner + "/" + repoName + "/dependency-graph/sbom", {
+
+  const response  = await octokit.request("GET /repos/" + owner + "/" + 
+    repoName + "/dependency-graph/sbom", {
     owner: owner,
     repo: repoName,
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
   }});
   if(response == null) {
-    throw "invalid response";
+    throw "Failed to Fetch SBOM";
   }
+
   return response.data.sbom;
 }
 
