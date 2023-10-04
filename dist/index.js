@@ -48080,7 +48080,7 @@ const fetch = __nccwpck_require__(7119);
 /**
  * Self Invoking function that runs core logic of the plugin.
  */
-async function run() {
+async function invokePlugin() {
   try {
     const gcs_credentials = core.getInput('gcs_credentials');
     const owner = core.getInput('owner');
@@ -48095,7 +48095,7 @@ async function run() {
     const bucketName = 'sca_github_action';
     const fileName = 'dependency-graph.json';
 
-    const dependencyGraph  = fetchSBOM(octokit, owner, repoName);
+    const dependencyGraph  = fetchSBOM(owner, repoName);
 
     // Save the dependency graph to a file (adjust this part as needed)
     fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
@@ -48154,7 +48154,7 @@ async function installOSVScanner() {
   await exec.exec('go install github.com/google/osv-scanner/cmd/osv-scanner@v1');
 }
 
-run();
+invokePlugin();
 
 })();
 
