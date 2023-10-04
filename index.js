@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 /**
  * Self Invoking function that runs core logic of the plugin.
  */
-async function run() {
+async function invokePlugin() {
   try {
     const gcs_credentials = core.getInput('gcs_credentials');
     const owner = core.getInput('owner');
@@ -81,4 +81,4 @@ async function installOSVScanner() {
   await exec.exec('go install github.com/google/osv-scanner/cmd/osv-scanner@v1');
 }
 
-run();
+invokePlugin();
