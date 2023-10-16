@@ -13,6 +13,9 @@ inputs :
   repoName : # Target Repo
     description: 'Name of the Repo to be scanned'
     required: true
+  path : # Target file path
+    description: 'Path of the Repo to be scanned'
+    required: true  
 runs:
   using: 'node16'
   main: 'dist/index.js'
