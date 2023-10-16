@@ -15,26 +15,7 @@ async function invokePlugin() {
     const fs = require('fs');
 
     fs.writeFileSync('gcs-credentials.json', gcs_credentials);
-
-    const storage = new Storage({
-      keyFilename: 'gcs-credentials.json'
-    });
-    const bucketName = 'sca_github_action';
-    const fileName = 'dependency-graph.json';
-
-    const dependencyGraph  = fetchSBOM(owner, repoName);
-
-    // Save the dependency graph to a file (adjust this part as needed)
-    fs.writeFileSync(fileName, JSON.stringify(dependencyGraph, null, 2));
-    await storage.bucket(bucketName).upload(fileName);
-
-    installOSVScanner();
-
-    // Scan the SBOM and produce a VAX file.
-    await exec.exec('osv-scanner --sbom=dependency-graph.json > vulnerabilities.json');
-
-    await storage.bucket(bucketName).upload(vulnerabilities.json);
-    core.setOutput('uploaded-file', fileName);
+    teraform();
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -78,7 +59,15 @@ async function installOSVScanner() {
   await exec.exec('go version');
 
   // Install OSV Scanner on the VM
-  await exec.exec('go install github.com/google/osv-scanner/cmd/osv-scanner@v1');
+  await exec.exec('sudo yum install -y yum-utils');
+}
+
+async function install teraform() {
+   // Install teraform
+   await exec.exec('sudo yum install -y yum-utils');
+   await exec.exec('sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo');
+   await exec.exec('sudo yum -y install terraform');
+   await exec.exec('terraform init');
 }
 
 invokePlugin();
