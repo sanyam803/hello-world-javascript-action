@@ -13,9 +13,10 @@ async function invokePlugin() {
     const owner = core.getInput('owner');
     const repoName = core.getInput('repoName');
     const fs = require('fs');
+    const path = require('path');
     
     fs.writeFileSync('gcs-credentials.json', gcs_credentials);
-    fetchSBOM(owner, repoName);
+    fetchSBOM(owner, repoName, path);
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -27,7 +28,7 @@ async function invokePlugin() {
  * @param {string} repoName : name of repo.
  * @return {!Object} sbom : SBOM of the repo generated using GitHub API.
  */
-async function fetchSBOM(owner, repoName) {
+async function fetchSBOM(owner, repoName, path) {
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
     request: {
@@ -35,13 +36,11 @@ async function fetchSBOM(owner, repoName) {
     }
   });
   await exec.exec('terraform init');
-  const response  = await octokit.request("GET /repos/" + owner + "/" + 
-    repoName {
-    owner: owner,
-    repo: repoName,
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28'
-  }});
+  const response  = await octokit.rest.repos.getContent({
+    owner,
+    repoName,
+    path,
+  });
   if(response == null) {
     throw "Failed to Fetch SBOM";
   }
