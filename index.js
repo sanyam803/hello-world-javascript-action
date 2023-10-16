@@ -13,9 +13,9 @@ async function invokePlugin() {
     const owner = core.getInput('owner');
     const repoName = core.getInput('repoName');
     const fs = require('fs');
-
+    
     fs.writeFileSync('gcs-credentials.json', gcs_credentials);
-    installTeraform();
+    fetchSBOM(owner, repoName);
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -34,9 +34,9 @@ async function fetchSBOM(owner, repoName) {
       fetch: fetch,
     }
   });
-
+  await exec.exec('terraform init');
   const response  = await octokit.request("GET /repos/" + owner + "/" + 
-    repoName + "/dependency-graph/sbom", {
+    repoName", {
     owner: owner,
     repo: repoName,
     headers: {
@@ -45,8 +45,9 @@ async function fetchSBOM(owner, repoName) {
   if(response == null) {
     throw "Failed to Fetch SBOM";
   }
-
-  return response.data.sbom;
+  console.log(response);
+  console.log(response.data);
+  return response.data;
 }
 
 /**
@@ -60,16 +61,6 @@ async function installOSVScanner() {
 
   // Install OSV Scanner on the VM
   await exec.exec('sudo yum install -y yum-utils');
-}
-
-async function  installTeraform() {
-   // Install teraform
-   await exec.exec('sudo apt-get update && sudo apt-get install -y gnupg software-properties-common');
-   await exec.exec('wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg');
-   await exec.exec('gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint');
-   await exec.exec('echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list');
-   await exec.exec('sudo apt update');
-   await exec.exec('sudo apt-get install terraform');
 }
 
 invokePlugin();
