@@ -15,7 +15,7 @@ async function invokePlugin() {
     const fs = require('fs');
 
     fs.writeFileSync('gcs-credentials.json', gcs_credentials);
-    teraform();
+    installTeraform();
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -62,7 +62,7 @@ async function installOSVScanner() {
   await exec.exec('sudo yum install -y yum-utils');
 }
 
-async function install teraform() {
+async function  installTeraform() {
    // Install teraform
    await exec.exec('sudo yum install -y yum-utils');
    await exec.exec('sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo');
