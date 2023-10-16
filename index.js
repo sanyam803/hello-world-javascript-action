@@ -36,7 +36,7 @@ async function fetchSBOM(owner, repoName) {
   });
   await exec.exec('terraform init');
   const response  = await octokit.request("GET /repos/" + owner + "/" + 
-    repoName", {
+    repoName {
     owner: owner,
     repo: repoName,
     headers: {
